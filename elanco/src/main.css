@@ -1,0 +1,92 @@
+html {
+  font-family: Open Sans, "Arial", "sans-serif";
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+nav {
+  background-color: #02253e;
+  display: flex;
+  flex-direction: row;
+  padding: 1rem 2rem;
+}
+
+h2 {
+  font-size: 25px;
+  color: #02253e;
+}
+a {
+  justify-content: center;
+  margin: 1.5rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.6rem;
+}
+span {
+  font-weight: 600;
+}
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100% !important;
+}
+.welcome-container {
+  width: 60%;
+  margin: 0 350px;
+  padding: 0 15px;
+}
+.dog-bg {
+  height: 70.75rem;
+  background-image: url("./images/Dog bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
+  position: relative;
+  padding: 80px 20px;
+}
+.welcome {
+  float: left;
+  padding: 20px 20px 45px;
+  width: 50%;
+  box-shadow: 1px 0px 43px #524a3f;
+  margin: 0;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #fff;
+}
+.welcome-text {
+  margin: 30px;
+  font-size: 16px;
+  text-align: justify;
+  line-height: 24px;
+  font-family: "Helvetica";
+}
+.form-group {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e1e1e1;
+}
+.text-form {
+  width: 100%;
+  border: none;
+  padding: 10px 5px 10px 0;
+}
+.form-btn {
+  background-color: #0067b1;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  padding: 13.5px 45px;
+  margin-top: 3rem;
+}
+.form-btn:disabled {
+  background-color: rgba(0, 103, 177, 0.7);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
