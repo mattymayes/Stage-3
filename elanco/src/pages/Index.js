@@ -5,7 +5,7 @@ import { useGlobalContext } from "../context";
 const Index = () => {
   return (
     <>
-      <section className="container">
+      <section className="container section ">
         <div className="dog-bg">
           <WelcomeBox />
         </div>

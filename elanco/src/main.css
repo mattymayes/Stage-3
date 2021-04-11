@@ -1,9 +1,9 @@
 html {
-  font-family: Open Sans, "Arial", "Helvatica", "sans-serif";
   font-size: 10px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+  font-family: Open Sans, "Arial", "Helvetica", "sans-serif";
 }
 body {
   margin: 0;
@@ -15,7 +15,12 @@ nav {
   flex-direction: row;
   padding: 1rem 2rem;
 }
-
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eee;
+}
 h2 {
   font-size: 25px;
   color: #02253e;
@@ -64,7 +69,6 @@ span {
   font-size: 16px;
   text-align: justify;
   line-height: 24px;
-  font-family: "Helvetica";
 }
 .form-group {
   margin-bottom: 15px;
@@ -103,4 +107,97 @@ span {
 }
 .hide {
   visibility: hidden;
+}
+.section {
+  width: 1170px;
+  margin: 0px auto;
+  padding: 0 15px;
+}
+.progGroup {
+  margin: 20px 0;
+  overflow: hidden;
+  height: 20px;
+  background-color: #e1e1e1;
+}
+.progBar {
+  transform: skewX(-45deg);
+  background-color: #0067b1;
+  height: 100%;
+  float: left;
+  transform-origin: 100% 0;
+}
+.offerBar {
+  width: 11.11%;
+}
+.promo {
+  color: #0067b1;
+  font-size: 32px;
+}
+.paraPromo {
+  margin: 0 0 10px;
+  font-size: 14px;
+}
+.promoBox {
+  margin-top: 22px;
+  background: #eee;
+  width: 50%;
+  padding: 0;
+  border-right: 2px dashed #666 !important;
+  border-left: 2px dashed #666 !important;
+  border-bottom: 2px dashed #666 !important;
+}
+.promoHead {
+  padding: 10px;
+  margin: -2px;
+  border: 2px solid #0c4f80;
+  background-color: #0067b1;
+  font-size: 18px;
+  color: #fff;
+}
+.offerHeadText {
+  font-weight: bold;
+}
+.promoh2 {
+  margin: 20px 0 10px;
+  padding: 10px 30px;
+}
+.promoStuff {
+  margin: 0 0 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+.terms {
+  font-size: 14px;
+  color: #767676;
+  font-style: italic;
+  font-weight: 400;
+}
+.cancel {
+  color: #646464;
+  cursor: pointer;
+}
+.smallify {
+  width: 14px;
+  height: 16px;
+}
+.greyBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 2em;
+  background-color: #eee;
+  text-align: center;
+}
+.back-btn {
+  background-color: #767676;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  padding: 13.5px 45px;
+  margin-top: 3rem;
+  margin-right: 25px;
+  cursor: pointer;
 }
