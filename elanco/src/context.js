@@ -3,11 +3,10 @@ import React, { useState, useContext, useEffect, useCallback } from "react";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  const [offer, setOffer] = useState("");
-  const [date, setDate] = useState("");
+  const [alert, setAlert] = useState(true);
 
   return (
-    <AppContext.Provider value={(offer, date, setOffer, setDate)}>
+    <AppContext.Provider value={{ alert, setAlert }}>
       {children}
     </AppContext.Provider>
   );
