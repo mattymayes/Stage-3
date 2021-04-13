@@ -78,6 +78,7 @@ span {
   width: 100%;
   border: none;
   padding: 10px 5px 10px 0;
+  outline: none;
 }
 .form-btn {
   background-color: #0067b1;
@@ -106,7 +107,7 @@ span {
   border-radius: 4px;
 }
 .hide {
-  visibility: hidden;
+  display: none;
 }
 .section {
   width: 1170px;
@@ -200,4 +201,43 @@ span {
   margin-top: 3rem;
   margin-right: 25px;
   cursor: pointer;
+}
+.row {
+  display: flex;
+}
+.logIn-column {
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+}
+.logIn-section {
+  padding: 100px;
+}
+.logAlert {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 40px;
+}
+.accountH3 {
+  color: #666;
+  font-size: 24px;
+  cursor: pointer;
+}
+.accountDiv {
+  display: flex;
+  justify-content: space-evenly;
+}
+.blueify {
+  color: #0067b1;
+}
+.form-col {
+  width: 50%;
+}
+.col-1 {
+  width: 90%;
+  margin-bottom: 10px;
+}
+.col-2 {
+  width: 90%;
+  margin-bottom: 33px;
 }

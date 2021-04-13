@@ -25,30 +25,34 @@ const SingleOffer = () => {
         Please acknowledge the terms and conditions for your selected offer
         before continuing the submission process
       </p>
-
-      <div className="promoBox">
-        <p className="promoHead">
-          <span className="offerHeadText">Offer Number </span>
-          {id}
-        </p>
-        <h2 className="promoh2">{offer[0].text}</h2>
-        <div className="promoStuff">
-          <p className="promoP">
-            <strong className="promoStrong">Purchase Dates</strong> <br />
-            {offer[0].readableDates.start} - {offer[0].readableDates.end}
+      <div className="row">
+        {" "}
+        <div className="promoBox">
+          <p className="promoHead">
+            <span className="offerHeadText">Offer Number </span>
+            {id}
           </p>
-          <p className="promoP">
-            <strong className="promoStrong">Submit By:</strong>
-            <br />
-            {offer[0].readableDates.submit}
-          </p>
+          <h2 className="promoh2">{offer[0].text}</h2>
+          <div className="promoStuff">
+            <p className="promoP">
+              <strong className="promoStrong">Purchase Dates</strong> <br />
+              {offer[0].purchaseDates.start} - {offer[0].purchaseDates.end}
+            </p>
+            <p className="promoP">
+              <strong className="promoStrong">Submit By:</strong>
+              <br />
+              {offer[0].purchaseDates.submit}
+            </p>
+          </div>
         </div>
+        <img src={offer[0].img} style={{ width: "525px" }} />
       </div>
+
       <hr></hr>
       <span className="terms">
         Terms and Conditions: Offer valid for purchases dated{" "}
-        {offer[0].readableDates.start} - {offer[0].readableDates.end} and
-        requests must be received on or before {offer[0].readableDates.submit}.
+        {offer[0].purchaseDates.start} - {offer[0].purchaseDates.end} and
+        requests must be received on or before {offer[0].purchaseDates.submit}.
         Limit 10 rebates per brand per household. This offer may not be combined
         with any other offer. To redeem your rebate, we require an original
         licensed veterinary invoice showing product(s) purchased from your
