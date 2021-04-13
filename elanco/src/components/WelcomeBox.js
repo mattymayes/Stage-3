@@ -44,7 +44,6 @@ const WelcomeBox = () => {
   useEffect(() => {
     if (date) {
       if (validateDate(date)) {
-        console.log(Date.parse(date));
         setDisbaled(false);
       } else {
         setDisbaled(true);
@@ -55,9 +54,7 @@ const WelcomeBox = () => {
   useEffect(() => {
     temp = [];
     const compDate = Date.parse(date);
-    offers.map((item) => {
-      console.log(Date.parse(item.purchaseDates.start));
-    });
+    offers.map((item) => {});
 
     temp = offers.filter(
       (item) =>

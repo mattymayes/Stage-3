@@ -34,11 +34,66 @@ export const offers = [
   {
     id: "ELU2021",
     text: "Receive $10 rebate when you purchase a 15 mL bottle of Elura®",
-    purchaseDates: { start: "2021-03-01", end: "2021-09-02" },
-    readableDates: {
+    purchaseDates: {
       start: "03/01/2021",
       end: "06/30/2021",
       submit: "09/01/2021",
     },
+    img: "",
+  },
+  {
+    id: "TFX2021",
+    text:
+      "Receive $30 rebate when you purchase 12 doses of Trifexis® (spinosad + milbemycin oxime) or $10 rebate when you purchase 6 doses of Trifexis® (spinosad + milbemycin oxime)",
+    purchaseDates: {
+      start: "01/01/2021",
+      end: "06/30/2021",
+      submit: "09/01/2021",
+    },
+    img: "https://www.elancorebates.com/media/uploads/1609890394099.jpg",
+  },
+  {
+    id: "INCR2021",
+    text:
+      "Receive $75 rebate when you purchase 12 doses of Credelio® (lotilaner) with 12 doses of Interceptor® Plus (milbemycin oxime/praziquantel) or $20 rebate when you purchase 6 doses of Credelio® with 6 doses of Interceptor® Plus",
+    purchaseDates: {
+      start: "01/01/2021",
+      end: "06/30/2021",
+      submit: "09/01/2021",
+    },
+    img: "https://www.elancorebates.com/media/uploads/1609890380414.jpg",
+  },
+  {
+    id: "DMX2021",
+    text:
+      "Receive $45 rebate when you purchase 90 tablets of Deramaxx® (deracoxib), $30 rebate when you purchase 60 tablets of Deramaxx® (deracoxib) or $15 rebate when you purchase 30 tablets of Deramaxx® (deracoxib)",
+    purchaseDates: {
+      start: "01/01/2021",
+      end: "06/23/2021",
+      submit: "09/01/2021",
+    },
+    img: "https://www.elancorebates.com/media/uploads/1609890364282.jpg",
+  },
+  {
+    id: "CRD2021",
+    text:
+      "Receive $35 rebate when you purchase 12 doses of Credelio® (lotilaner), $15 rebate when you purchase 6 doses of Credelio® (lotilaner) or $5 rebate when you purchase 3 doses of Credelio® (lotilaner)",
+    purchaseDates: {
+      start: "01/01/2021",
+      end: "06/30/2021",
+      submit: "09/01/2021",
+    },
+    img: "https://www.elancorebates.com/media/uploads/1609890356193.jpg",
+  },
+  {
+    id: "21-42502",
+    text:
+      "Receive $30 rebate when you purchase 12 doses of Trifexis® (spinosad + milbemycin oxime) or $10 rebate when you purchase 6 doses of Trifexis® (spinosad + milbemycin oxime)",
+    purchaseDates: {
+      start: "01/01/2021",
+      end: "06/30/2021",
+      submit: "09/01/2021",
+    },
+    img: "https://www.elancorebates.com/media/uploads/1609890394099.jpg",
   },
 ];
