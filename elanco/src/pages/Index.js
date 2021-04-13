@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import WelcomeBox from "../components/WelcomeBox";
 import { useGlobalContext } from "../context";
+import { accounts } from "../data";
 
 const Index = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
   const [form, setForm] = useState("create");
+  const [formAccount, setFormAccount] = useState({ email: "", password: "" });
+  const [account, setAccount] = useState();
   const handleCreate = (type) => {
     {
       if (type === "create") {
@@ -12,6 +14,17 @@ const Index = () => {
       } else {
         form === "log" ? setForm("") : setForm("log");
       }
+    }
+  };
+  const handleSignin = (e) => {
+    e.preventDefault();
+    const tempFormAccount = accounts.find(
+      (item) =>
+        item.email === formAccount.email &&
+        item.password === formAccount.password
+    );
+    if (tempFormAccount) {
+      setAccount(tempFormAccount);
     }
   };
   return (
@@ -25,7 +38,7 @@ const Index = () => {
             <h2 style={{ marginBottom: "10px" }}>
               <strong style={{ fontSize: "32px" }}>Your Account</strong>
             </h2>
-            {!loggedIn ? (
+            {!account ? (
               <>
                 <p className="logAlert">You are not currently signed in</p>
                 <div className="accountDiv">
@@ -324,12 +337,17 @@ const Index = () => {
                 </div>
                 <div className={`sign-in ${form !== "log" && "hide"}`}>
                   <h2>Signing In</h2>
-                  <form>
+                  <form onSubmit={handleSignin}>
                     <div
                       className="form-group"
                       style={{ width: "75%", margin: "auto" }}
                     >
                       <input
+                        onChange={(e) => {
+                          const temp = formAccount;
+                          temp.email = e.target.value;
+                          setFormAccount(temp);
+                        }}
                         className="text-form"
                         placeholder="email address"
                       />
@@ -341,14 +359,22 @@ const Index = () => {
                         margin: "10px auto",
                       }}
                     >
-                      <input className="text-form" placeholder="password" />
+                      <input
+                        className="text-form"
+                        placeholder="password"
+                        onChange={(e) => {
+                          const temp = formAccount;
+                          temp.password = e.target.value;
+                          setFormAccount(temp);
+                        }}
+                      />
                     </div>
                     <button className="form-btn">Sign In</button>
                   </form>
                 </div>
               </>
             ) : (
-              <p className="logAlert">Welcome back</p>
+              <p className="logAlert">Welcome back, {account.firstName}</p>
             )}
           </div>
         </div>

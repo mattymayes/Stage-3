@@ -30,6 +30,14 @@ export const links = [
     link: "#",
   },
 ];
+export const accounts = [
+  {
+    id: 1,
+    email: "domoniccassidy@email.com",
+    password: "darkel1xirAddict",
+    firstName: "Domonic",
+  },
+];
 export const offers = [
   {
     id: "ELU2021",
