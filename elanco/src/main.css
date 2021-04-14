@@ -241,3 +241,33 @@ span {
   width: 90%;
   margin-bottom: 33px;
 }
+.panelHead {
+  padding: 10px 15px;
+  font-size: 14px;
+  background-color: #e5e5e5;
+  border-color: #ddd;
+  border-bottom: 1px solid transparent;
+}
+.offerPanel {
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+  border-color: #ddd;
+}
+.panelBody {
+  padding: 15px;
+}
+p,
+strong {
+  font-size: 14px;
+}
+.select .panelBody {
+  border: 2px solid #0067b1;
+}
+.select .panelHead {
+  background-color: #0067b1;
+  color: #fff;
+}

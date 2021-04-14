@@ -48,6 +48,7 @@ export const offers = [
       submit: "09/01/2021",
     },
     img: "",
+    selected: false,
   },
   {
     id: "TFX2021",
@@ -59,6 +60,7 @@ export const offers = [
       submit: "09/01/2021",
     },
     img: "https://www.elancorebates.com/media/uploads/1609890394099.jpg",
+    selected: false,
   },
   {
     id: "INCR2021",
@@ -70,6 +72,7 @@ export const offers = [
       submit: "09/01/2021",
     },
     img: "https://www.elancorebates.com/media/uploads/1609890380414.jpg",
+    selected: false,
   },
   {
     id: "DMX2021",
@@ -81,6 +84,7 @@ export const offers = [
       submit: "09/01/2021",
     },
     img: "https://www.elancorebates.com/media/uploads/1609890364282.jpg",
+    selected: false,
   },
   {
     id: "CRD2021",
@@ -92,6 +96,7 @@ export const offers = [
       submit: "09/01/2021",
     },
     img: "https://www.elancorebates.com/media/uploads/1609890356193.jpg",
+    selected: false,
   },
   {
     id: "21-42502",
@@ -103,5 +108,6 @@ export const offers = [
       submit: "09/01/2021",
     },
     img: "https://www.elancorebates.com/media/uploads/1609890394099.jpg",
+    selected: false,
   },
 ];

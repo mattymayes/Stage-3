@@ -28,7 +28,6 @@ const WelcomeBox = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(Date.parse(date));
 
     if (offer) {
       if (date) {
@@ -38,6 +37,8 @@ const WelcomeBox = () => {
           setAlert(false);
         }
       }
+    } else if (date && !offer) {
+      window.location.href = `offers/${date}`;
     }
   };
 

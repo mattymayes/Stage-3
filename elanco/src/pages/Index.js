@@ -1,12 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import WelcomeBox from "../components/WelcomeBox";
 import { useGlobalContext } from "../context";
-import { accounts } from "../data";
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem("list");
+  if (list) {
+    return JSON.parse(localStorage.getItem("list"));
+  }
+};
 const Index = () => {
-  const [form, setForm] = useState("create");
+  const [form, setForm] = useState("");
   const [formAccount, setFormAccount] = useState({ email: "", password: "" });
   const [account, setAccount] = useState();
+  const [signError, setSignError] = useState("");
+  const [accounts, setAccounts] = useState(getLocalStorage());
+  const [newAccount, setNewAccount] = useState({
+    id: accounts.length + 1,
+    firstName: "",
+    lastName: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    email: "",
+    confirmEmail: "",
+    street: "",
+    apartment: "",
+    zip: "",
+    city: "",
+    state: "",
+  });
   const handleCreate = (type) => {
     {
       if (type === "create") {
@@ -16,8 +38,39 @@ const Index = () => {
       }
     }
   };
+  const handleCreateAccount = (e) => {
+    e.preventDefault();
+    setNewAccount({
+      id: accounts.length + 1,
+      firstName: "",
+      lastName: "",
+      phone: "",
+      password: "",
+      confirmPassword: "",
+      email: "",
+      confirmEmail: "",
+      street: "",
+      apartment: "",
+      zip: "",
+      city: "",
+      state: "",
+    });
+
+    setAccount(newAccount);
+    const tempAccounts = [...accounts, newAccount];
+    setAccounts(tempAccounts);
+
+    localStorage.setItem("list", JSON.stringify(tempAccounts));
+  };
   const handleSignin = (e) => {
     e.preventDefault();
+    if (!formAccount.email) {
+      setSignError("Please Enter Your Email");
+    } else if (!formAccount.password) {
+      setSignError("Please Enter Your Password");
+    } else {
+      setSignError("Your Email or Password are Invalid");
+    }
     const tempFormAccount = accounts.find(
       (item) =>
         item.email === formAccount.email &&
@@ -59,49 +112,85 @@ const Index = () => {
                   className={`create-account ${form !== "create" && "hide"}`}
                 >
                   <h2>Creating Account</h2>
-                  <form>
+                  <form onSubmit={handleCreateAccount}>
                     <div style={{ display: "flex" }}>
                       <div className="form-col">
                         <div className="form-group col-1">
                           <input
                             className="text-form"
                             placeholder="First Name*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.firstName = e.target.value;
+                              setNewAccount(temp);
+                            }}
                           />
                         </div>
                         <div className="form-group col-1">
                           <input
                             className="text-form "
                             placeholder="Last Name*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.lastName = e.target.value;
+                              setNewAccount(temp);
+                            }}
                           />
                         </div>
                         <div className="form-group col-1">
                           <input
                             className="text-form"
                             placeholder="Phone Number"
+                            type="tel"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.phone = e.target.value;
+                              setNewAccount(temp);
+                            }}
                           />
                         </div>
                         <div className="form-group col-1">
                           <input
                             className="text-form"
                             placeholder="Password*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.password = e.target.value;
+                              setNewAccount(temp);
+                            }}
                           />
                         </div>
                         <div className="form-group col-1">
                           <input
                             className="text-form"
                             placeholder="Confirm Password*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.confirmPassword = e.target.value;
+                              setNewAccount(temp);
+                            }}
                           />
                         </div>
                         <div className="form-group col-1">
                           <input
                             className="text-form"
                             placeholder="Email Address*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.email = e.target.value;
+                              setNewAccount(temp);
+                            }}
                           />
                         </div>
                         <div className="form-group col-1">
                           <input
                             className="text-form"
                             placeholder="Confirm Email Address*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.confirmEmail = e.target.value;
+                              setNewAccount(temp);
+                            }}
                           />
                         </div>
                       </div>
@@ -110,28 +199,57 @@ const Index = () => {
                           <input
                             className="text-form"
                             placeholder="Street Address*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.street = e.target.value;
+                              setNewAccount(temp);
+                            }}
                           />
                         </div>
                         <div className="form-group col-2">
                           <input
                             className="text-form"
                             placeholder="Apartment/Suite #"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.apartment = e.target.value;
+                              setNewAccount(temp);
+                            }}
                           />
                         </div>
                         <div className="form-group col-2">
                           <input
                             className="text-form"
                             placeholder="ZIP Code*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.zip = e.target.value;
+                              setNewAccount(temp);
+                            }}
                           />
                         </div>
                         <div className="form-group col-2">
-                          <input className="text-form" placeholder="City*" />
+                          <input
+                            className="text-form"
+                            placeholder="City*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.city = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                          />
                         </div>
                         <div className="form-group col-2">
                           <select
                             style={{ color: "#666" }}
                             className="text-form"
                             type="text"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.state = e.target.value;
+                              setNewAccount(temp);
+                              console.log(newAccount);
+                            }}
                           >
                             <option value="" selected="selected">
                               State*
@@ -369,6 +487,7 @@ const Index = () => {
                         }}
                       />
                     </div>
+                    <p>{signError}</p>
                     <button className="form-btn">Sign In</button>
                   </form>
                 </div>
