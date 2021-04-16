@@ -5,6 +5,7 @@ import Home from "./pages/Index";
 import Offers from "./pages/Offers";
 import SingleOffer from "./pages/SingleOffer";
 import Alert from "./components/Alert";
+import Scan from "./pages/Scan";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         </Route>
         <Route path="/offer">
           <SingleOffer />
+        </Route>
+        <Route path="/scan">
+          <Scan />
         </Route>
       </Switch>
     </Router>

@@ -14,6 +14,12 @@ const Index = () => {
   const [account, setAccount] = useState();
   const [signError, setSignError] = useState("");
   const [accounts, setAccounts] = useState(getLocalStorage());
+  const [createError, setCreateError] = useState({
+    missing: "",
+    password: "",
+    email: "",
+  });
+
   const [newAccount, setNewAccount] = useState({
     id: accounts.length + 1,
     firstName: "",
@@ -39,29 +45,82 @@ const Index = () => {
     }
   };
   const handleCreateAccount = (e) => {
-    e.preventDefault();
-    setNewAccount({
-      id: accounts.length + 1,
-      firstName: "",
-      lastName: "",
-      phone: "",
+    setCreateError({
+      missing: "",
       password: "",
-      confirmPassword: "",
       email: "",
-      confirmEmail: "",
-      street: "",
-      apartment: "",
-      zip: "",
-      city: "",
-      state: "",
     });
+    let tempError = createError;
+    e.preventDefault();
+    let misdemeanours = 0;
 
-    setAccount(newAccount);
-    const tempAccounts = [...accounts, newAccount];
-    setAccounts(tempAccounts);
+    if (!newAccount.firstName) {
+      misdemeanours += 1;
+      tempError.missing = "Please complete all required fields";
+    }
+    if (!newAccount.lastName) {
+      misdemeanours += 1;
+      tempError.missing = "Please complete all required fields";
+    }
+    if (!newAccount.password) {
+      misdemeanours += 1;
+      tempError.missing = "Please complete all required fields";
+    }
+    if (newAccount.password !== newAccount.confirmPassword) {
+      misdemeanours += 1;
+      tempError.password = "Your passwords do not match";
+    }
+    if (!newAccount.email) {
+      misdemeanours += 1;
+      tempError.missing = "Please complete all required fields";
+    }
+    if (newAccount.email !== newAccount.confirmEmail) {
+      misdemeanours += 1;
+      tempError.email = "Your emails do not match";
+    }
+    if (!newAccount.street) {
+      misdemeanours += 1;
+      tempError.missing = "Please complete all required fields";
+    }
+    if (!newAccount.state) {
+      misdemeanours += 1;
+      tempError.missing = "Please complete all required fields";
+    }
+    if (!newAccount.zip) {
+      misdemeanours += 1;
+      tempError.missing = "Please complete all required fields";
+    }
+    if (!newAccount.city) {
+      misdemeanours += 1;
+      tempError.missing = "Please complete all required fields";
+    }
 
-    localStorage.setItem("list", JSON.stringify(tempAccounts));
+    if (misdemeanours === 0) {
+      setAccount(newAccount);
+      const tempAccounts = [...accounts, newAccount];
+      setAccounts(tempAccounts);
+      localStorage.setItem("list", JSON.stringify(tempAccounts));
+
+      setNewAccount({
+        id: accounts.length + 1,
+        firstName: "",
+        lastName: "",
+        phone: "",
+        password: "",
+        confirmPassword: "",
+        email: "",
+        confirmEmail: "",
+        street: "",
+        apartment: "",
+        zip: "",
+        city: "",
+        state: "",
+      });
+    }
+    setCreateError({ ...createError, tempError });
+    console.log(createError);
   };
+
   const handleSignin = (e) => {
     e.preventDefault();
     if (!formAccount.email) {
@@ -80,6 +139,7 @@ const Index = () => {
       setAccount(tempFormAccount);
     }
   };
+
   return (
     <>
       <section className="container  ">
@@ -112,6 +172,27 @@ const Index = () => {
                   className={`create-account ${form !== "create" && "hide"}`}
                 >
                   <h2>Creating Account</h2>
+                  <p
+                    className={`createError ${
+                      createError.missing === "" && "hide"
+                    }`}
+                  >
+                    {createError.missing}
+                  </p>
+                  <p
+                    className={`createError ${
+                      createError.password === "" && "hide"
+                    }`}
+                  >
+                    {createError.password}
+                  </p>
+                  <p
+                    className={`createError ${
+                      createError.email === "" && "hide"
+                    }`}
+                  >
+                    {createError.email}
+                  </p>
                   <form onSubmit={handleCreateAccount}>
                     <div style={{ display: "flex" }}>
                       <div className="form-col">
@@ -127,6 +208,9 @@ const Index = () => {
                           />
                         </div>
                         <div className="form-group col-1">
+                          <p>
+                            <span className="formTag">Last Name*</span>
+                          </p>
                           <input
                             className="text-form "
                             placeholder="Last Name*"
@@ -248,7 +332,6 @@ const Index = () => {
                               const temp = newAccount;
                               temp.state = e.target.value;
                               setNewAccount(temp);
-                              console.log(newAccount);
                             }}
                           >
                             <option value="" selected="selected">

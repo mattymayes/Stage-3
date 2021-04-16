@@ -203,7 +203,9 @@ span {
   cursor: pointer;
 }
 .row {
-  display: flex;
+  margin-right: -15px;
+  margin-left: -15px;
+  overflow: auto;
 }
 .logIn-column {
   max-width: 1000px;
@@ -235,11 +237,11 @@ span {
 }
 .col-1 {
   width: 90%;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .col-2 {
   width: 90%;
-  margin-bottom: 33px;
+  margin-bottom: 43.5px;
 }
 .panelHead {
   padding: 10px 15px;
@@ -270,4 +272,51 @@ strong {
 .select .panelHead {
   background-color: #0067b1;
   color: #fff;
+}
+.formTag {
+  float: left;
+  font-size: 12px;
+  font-weight: normal;
+}
+.createError {
+  color: #db2706;
+  background-color: #ffedea;
+  border: 1px solid #db2706;
+  padding: 1em;
+  width: 100%;
+  text-align: left;
+}
+.scanDiv {
+  border: 2px dashed #ccc;
+  background-color: #eee;
+  margin: 15px;
+  padding: 30px;
+  width: 50%;
+  text-align: center;
+  float: left;
+}
+.imageBtn {
+  background-color: #022541;
+  padding: 10px 20px;
+  margin-top: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 600;
+  border: none;
+  width: 80%;
+}
+.btn-text {
+  line-height: 12px;
+  color: #767676;
+  font-style: italic;
+  margin-top: 1em;
+}
+.addImageTxt {
+  width: 73%;
+  text-align: left;
+  float: left;
+  padding: 0 15px;
+  font-size: 14px;
 }
