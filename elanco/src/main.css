@@ -80,15 +80,20 @@ span {
   padding: 10px 5px 10px 0;
   outline: none;
 }
+p {
+  margin: 0;
+}
 .form-btn {
   background-color: #0067b1;
   border: none;
+  cursor: pointer;
   border-radius: 5px;
   font-size: 18px;
   font-weight: 600;
   color: #fff;
   padding: 13.5px 45px;
   margin-top: 3rem;
+  margin-bottom: 1em;
 }
 .form-btn:disabled {
   background-color: rgba(0, 103, 177, 0.7);
@@ -139,6 +144,7 @@ span {
   font-size: 14px;
 }
 .promoBox {
+  float: left;
   margin-top: 22px;
   background: #eee;
   width: 50%;
@@ -201,6 +207,7 @@ span {
   margin-top: 3rem;
   margin-right: 25px;
   cursor: pointer;
+  margin-bottom: 1em;
 }
 .row {
   margin-right: -15px;
@@ -319,4 +326,53 @@ strong {
   float: left;
   padding: 0 15px;
   font-size: 14px;
+}
+.clinicSection {
+  float: left;
+  padding: 20px 20px 45px;
+  width: 50%;
+  box-shadow: 1px 0px 43px #524a3f;
+  margin: 0;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #fff;
+  position: fixed;
+  z-index: 100000;
+}
+.clinicZip {
+  display: block;
+  padding: 25px;
+  margin: 1em 0;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.clinicGrid {
+  background-color: #ddd;
+  width: 100%;
+  height: 45px;
+}
+.clinicCol {
+  width: 40%;
+  color: #464646;
+  font-size: 14px;
+  margin-top: 12px;
+  float: left;
+}
+.clinicError {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.singleClinic {
+  overflow: auto;
+  border-bottom: 1px solid #ccc !important;
+}
+.selctedClinic {
+  background-color: #c3daee;
+}
+.clinicGood {
+  color: #12690f;
+  background-color: #b2ceb4;
+  border-color: #ebccd1;
 }

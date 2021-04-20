@@ -38,6 +38,20 @@ export const accounts = [
     firstName: "Domonic",
   },
 ];
+export const clinics = [
+  {
+    address1: "825 N CROCKETT",
+    address2: "SHERMAN, TX, US",
+    accountName: "Brakebill Veterinary Hospital",
+    zipcode: "75090",
+  },
+  {
+    address1: "2103 W HOUSTON ST",
+    address2: "SHERMAN, TX, US",
+    accountName: "Lange Veterinary",
+    zipcode: "75090",
+  },
+];
 export const offers = [
   {
     id: "ELU2021",

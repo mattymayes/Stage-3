@@ -8,10 +8,11 @@ import {
   useLocation,
 } from "react-router-dom";
 import { offers } from "../data";
+import receipt from "../images/Example Reciept.png";
 
 const Scan = () => {
   const location = useLocation();
-  const id = location.pathname.substring(7);
+  const id = location.pathname.substring(6);
   const offer = offers.filter((item) => item.id == id);
 
   const [images, setImages] = useState([]);
@@ -19,15 +20,16 @@ const Scan = () => {
   const handleImage = () => {
     setImages([
       {
-        image: "https://www.elancorebates.com/media/1557153670599.png",
+        image: receipt,
         text: "Example.png",
       },
     ]);
   };
+
   return (
     <section className="section scan-section">
       <div className="progGroup">
-        <div className="progBar offerBar"></div>
+        <div className="progBar offerBar" style={{ width: "22%" }}></div>
       </div>
       <h1 className="promo">My Purchase Details </h1>
       <p className="paraPromo">
@@ -56,7 +58,10 @@ const Scan = () => {
             return (
               <div className="row">
                 <div>
-                  <img style={{ float: "left" }} src={item.image}></img>
+                  <img
+                    style={{ float: "left", width: "40px" }}
+                    src={item.image}
+                  ></img>
                   <div className="addImageTxt">{item.text}</div>
                   <div>
                     <FaTrashAlt />
@@ -78,7 +83,7 @@ const Scan = () => {
         <button
           className="back-btn"
           onClick={() => {
-            window.location.href = "/offers";
+            window.location.href = `/offer/${id}`;
           }}
         >
           <span>
@@ -86,7 +91,12 @@ const Scan = () => {
           </span>
           Back
         </button>
-        <button className="form-btn">
+        <button
+          className="form-btn"
+          onClick={() => {
+            window.location.href = `/clinic/${id}`;
+          }}
+        >
           Continue
           <span>
             <FaChevronRight className="downabit " />

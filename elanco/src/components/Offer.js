@@ -7,7 +7,6 @@ import {
 } from "react-icons/fa";
 
 const Offer = ({ offer, index, isSelected, onClick }) => {
-  const handleSelect = () => {};
   return (
     <div className={`offerPanel ${isSelected && " select"}`} onClick={onClick}>
       <div className="panelHead">

@@ -15,9 +15,14 @@ import {
 } from "react-icons/fa";
 
 const Offers = () => {
-  const [selected, setSelected] = useState(2);
+  const [selected, setSelected] = useState();
   const location = useLocation();
   const date = Date.parse(location.pathname.substring(8));
+  const appliedOffers = offers.filter(
+    (offer) =>
+      Date.parse(offer.purchaseDates.start) <= date &&
+      Date.parse(offer.purchaseDates.submit) >= date
+  );
 
   return (
     <section className="section">
@@ -29,19 +34,15 @@ const Offers = () => {
       <p style={{ fontSize: "14px" }}>
         <strong>Purchase Date:</strong> {location.pathname.substring(8)}
       </p>
-      {offers.map((offer, index) => {
-        if (
-          Date.parse(offer.purchaseDates.start) <= date &&
-          Date.parse(offer.purchaseDates.submit) >= date
-        )
-          return (
-            <Offer
-              offer={offer}
-              index={index}
-              isSelected={selected === index ? true : false}
-              onClick={() => setSelected(index)}
-            />
-          );
+      {appliedOffers.map((offer, index) => {
+        return (
+          <Offer
+            offer={offer}
+            index={index}
+            isSelected={selected === index ? true : false}
+            onClick={() => setSelected(index)}
+          />
+        );
       })}
       <div className="greyBox">
         <button
@@ -55,7 +56,12 @@ const Offers = () => {
           </span>
           Back
         </button>
-        <button className="form-btn">
+        <button
+          className="form-btn"
+          onClick={() => {
+            window.location.href = `/offer/${offers[selected].id}`;
+          }}
+        >
           Continue
           <span>
             <FaChevronRight className="downabit " />

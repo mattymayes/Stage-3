@@ -4,7 +4,14 @@ import { links } from "../data";
 const Navbar = () => {
   return (
     <nav>
-      <img src={logo} alt="Elanco Logo" />
+      <img
+        style={{ cursor: "pointer" }}
+        src={logo}
+        alt="Elanco Logo"
+        onClick={() => {
+          window.location.href = `/`;
+        }}
+      />
       {links.map((link) => {
         return (
           <a key={link.id} href={link.link}>

@@ -88,7 +88,12 @@ const SingleOffer = () => {
           </span>
           Back
         </button>
-        <button className="form-btn">
+        <button
+          className="form-btn"
+          onClick={() => {
+            window.location.href = `/scan/${id}`;
+          }}
+        >
           Continue
           <span>
             <FaChevronRight className="downabit " />
