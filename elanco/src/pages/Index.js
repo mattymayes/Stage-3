@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import WelcomeBox from "../components/WelcomeBox";
-
+import SinglePet from "../components/SinglePet";
 import { useGlobalContext } from "../context";
 import { FaChevronRight } from "react-icons/fa";
 
@@ -27,7 +27,8 @@ const Index = () => {
     password: "",
     email: "",
   });
-  const [myPets, setMyPets] = useState(getLocalPets());
+  const [pets, setPets] = useState(getLocalPets());
+  const [myPets, setMyPets] = useState([]);
   const [addingPet, setAddingPet] = useState(false);
   const [petImage, setPetImage] = useState();
   const [formPet, setFormPet] = useState({
@@ -169,10 +170,64 @@ const Index = () => {
       temp.img = petImage.name;
       setFormPet(temp);
     }
-  }, [petImage]);
+  });
+  useEffect(() => {
+    if (account) {
+      setMyPets(getLocalPets().filter((pet) => pet.owner === account.email));
+    }
+  }, [account]);
   const addPet = (e) => {
     e.preventDefault();
-    const tempPets = [...myPets, formPet];
+    const temp = formPet;
+    temp.owner = account.email;
+    setAddingPet(false);
+    setPetImage();
+    const tempPets = [...pets, formPet];
+    localStorage.setItem("pets", JSON.stringify(tempPets));
+  };
+  const handleEditAccount = (e) => {
+    e.preventDefault();
+    const tempEdit = account;
+    let misdemeanours = 0;
+    if (newAccount.password !== newAccount.confirmPassword) {
+      misdemeanours += 1;
+    }
+
+    if (misdemeanours === 0) {
+      if (newAccount.firstName.length > 0) {
+        tempEdit.firstName = newAccount.firstName;
+      }
+      if (newAccount.lastName.length > 0) {
+        tempEdit.lastName = newAccount.lastName;
+      }
+      if (newAccount.phone.length > 0) {
+        tempEdit.phone = newAccount.phone;
+      }
+      if (newAccount.password.length > 0) {
+        tempEdit.password = newAccount.password;
+      }
+      if (newAccount.email.length > 0) {
+        tempEdit.email = newAccount.email;
+      }
+      if (newAccount.apartment.length > 0) {
+        tempEdit.apartment = newAccount.apartment;
+      }
+      if (newAccount.zip.length > 0) {
+        tempEdit.zip = newAccount.zip;
+      }
+      if (newAccount.city.length > 0) {
+        tempEdit.city = newAccount.city;
+      }
+      if (newAccount.state !== "") {
+        tempEdit.state = newAccount.state;
+      }
+
+      setAccount(tempEdit);
+      let tempAccounts = accounts.filter((acc) => acc.id !== account.id);
+      tempAccounts = [...tempAccounts, tempEdit];
+      setAccounts(tempAccounts);
+      localStorage.setItem("list", JSON.stringify(tempAccounts));
+    }
   };
 
   return (
@@ -634,7 +689,355 @@ const Index = () => {
                 </div>
 
                 <div className={`create-account ${form !== "edit" && "hide"}`}>
-                  lol
+                  <h2>Editing Details</h2>
+                  <p className="logAlert">
+                    {" "}
+                    Anything you change will be updated, whatever you leave will
+                    stay the same.{" "}
+                  </p>
+                  <form onSubmit={handleEditAccount}>
+                    <div style={{ display: "flex" }}>
+                      <div className="form-col">
+                        <div className="form-group col-1">
+                          <input
+                            className="text-form"
+                            placeholder="First Name*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.firstName = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                          />
+                        </div>
+                        <div className="form-group col-1">
+                          <p>
+                            <span className="formTag">Last Name*</span>
+                          </p>
+                          <input
+                            className="text-form "
+                            placeholder="Last Name*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.lastName = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                          />
+                        </div>
+                        <div className="form-group col-1">
+                          <input
+                            className="text-form"
+                            placeholder="Phone Number"
+                            type="tel"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.phone = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                          />
+                        </div>
+                        <div className="form-group col-1">
+                          <input
+                            className="text-form"
+                            placeholder="Password*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.password = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                          />
+                        </div>
+                        <div className="form-group col-1">
+                          <input
+                            className="text-form"
+                            placeholder="Confirm Password*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.confirmPassword = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                          />
+                        </div>
+                        <div className="form-group col-1">
+                          <input
+                            className="text-form"
+                            placeholder="Email Address*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.email = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                          />
+                        </div>
+                        <div className="form-group col-1">
+                          <input
+                            className="text-form"
+                            placeholder="Confirm Email Address*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.confirmEmail = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-col">
+                        <div className="form-group col-2">
+                          <input
+                            className="text-form"
+                            placeholder="Street Address*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.street = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                          />
+                        </div>
+                        <div className="form-group col-2">
+                          <input
+                            className="text-form"
+                            placeholder="Apartment/Suite #"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.apartment = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                          />
+                        </div>
+                        <div className="form-group col-2">
+                          <input
+                            className="text-form"
+                            placeholder="ZIP Code*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.zip = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                          />
+                        </div>
+                        <div className="form-group col-2">
+                          <input
+                            className="text-form"
+                            placeholder="City*"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.city = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                          />
+                        </div>
+                        <div className="form-group col-2">
+                          <select
+                            style={{ color: "#666" }}
+                            className="text-form"
+                            type="text"
+                            onChange={(e) => {
+                              const temp = newAccount;
+                              temp.state = e.target.value;
+                              setNewAccount(temp);
+                            }}
+                            placeholder="lol"
+                          >
+                            <option value="" selected="selected">
+                              State*
+                            </option>
+                            <option label="Alabama" value="AL">
+                              Alabama
+                            </option>
+                            <option label="Alaska" value="AK">
+                              Alaska
+                            </option>
+                            <option label="American Samoa" value="AS">
+                              American Samoa
+                            </option>
+                            <option label="Arizona" value="AZ">
+                              Arizona
+                            </option>
+                            <option label="Arkansas" value="AR">
+                              Arkansas
+                            </option>
+                            <option label="California" value="CA">
+                              California
+                            </option>
+                            <option label="Colorado" value="CO">
+                              Colorado
+                            </option>
+                            <option label="Connecticut" value="CT">
+                              Connecticut
+                            </option>
+                            <option label="Delaware" value="DE">
+                              Delaware
+                            </option>
+                            <option label="District Of Columbia" value="DC">
+                              District Of Columbia
+                            </option>
+                            <option
+                              label="Federated States Of Micronesia"
+                              value="FM"
+                            >
+                              Federated States Of Micronesia
+                            </option>
+                            <option label="Florida" value="FL">
+                              Florida
+                            </option>
+                            <option label="Georgia" value="GA">
+                              Georgia
+                            </option>
+                            <option label="Guam" value="GU">
+                              Guam
+                            </option>
+                            <option label="Hawaii" value="HI">
+                              Hawaii
+                            </option>
+                            <option label="Idaho" value="ID">
+                              Idaho
+                            </option>
+                            <option label="Illinois" value="IL">
+                              Illinois
+                            </option>
+                            <option label="Indiana" value="IN">
+                              Indiana
+                            </option>
+                            <option label="Iowa" value="IA">
+                              Iowa
+                            </option>
+                            <option label="Kansas" value="KS">
+                              Kansas
+                            </option>
+                            <option label="Kentucky" value="KY">
+                              Kentucky
+                            </option>
+                            <option label="Louisiana" value="LA">
+                              Louisiana
+                            </option>
+                            <option label="Maine" value="ME">
+                              Maine
+                            </option>
+                            <option label="Marshall Islands" value="MH">
+                              Marshall Islands
+                            </option>
+                            <option label="Maryland" value="MD">
+                              Maryland
+                            </option>
+                            <option label="Massachusetts" value="MA">
+                              Massachusetts
+                            </option>
+                            <option label="Michigan" value="MI">
+                              Michigan
+                            </option>
+                            <option label="Minnesota" value="MN">
+                              Minnesota
+                            </option>
+                            <option label="Mississippi" value="MS">
+                              Mississippi
+                            </option>
+                            <option label="Missouri" value="MO">
+                              Missouri
+                            </option>
+                            <option label="Montana" value="MT">
+                              Montana
+                            </option>
+                            <option label="Nebraska" value="NE">
+                              Nebraska
+                            </option>
+                            <option label="Nevada" value="NV">
+                              Nevada
+                            </option>
+                            <option label="New Hampshire" value="NH">
+                              New Hampshire
+                            </option>
+                            <option label="New Jersey" value="NJ">
+                              New Jersey
+                            </option>
+                            <option label="New Mexico" value="NM">
+                              New Mexico
+                            </option>
+                            <option label="New York" value="NY">
+                              New York
+                            </option>
+                            <option label="North Carolina" value="NC">
+                              North Carolina
+                            </option>
+                            <option label="North Dakota" value="ND">
+                              North Dakota
+                            </option>
+                            <option label="Northern Mariana Islands" value="MP">
+                              Northern Mariana Islands
+                            </option>
+                            <option label="Ohio" value="OH">
+                              Ohio
+                            </option>
+                            <option label="Oklahoma" value="OK">
+                              Oklahoma
+                            </option>
+                            <option label="Oregon" value="OR">
+                              Oregon
+                            </option>
+                            <option label="Palau" value="PW">
+                              Palau
+                            </option>
+                            <option label="Pennsylvania" value="PA">
+                              Pennsylvania
+                            </option>
+                            <option label="Puerto Rico" value="PR">
+                              Puerto Rico
+                            </option>
+                            <option label="Rhode Island" value="RI">
+                              Rhode Island
+                            </option>
+                            <option label="South Carolina" value="SC">
+                              South Carolina
+                            </option>
+                            <option label="South Dakota" value="SD">
+                              South Dakota
+                            </option>
+                            <option label="Tennessee" value="TN">
+                              Tennessee
+                            </option>
+                            <option label="Texas" value="TX">
+                              Texas
+                            </option>
+                            <option label="Utah" value="UT">
+                              Utah
+                            </option>
+                            <option label="Vermont" value="VT">
+                              Vermont
+                            </option>
+                            <option label="Virgin Islands" value="VI">
+                              Virgin Islands
+                            </option>
+                            <option label="Virginia" value="VA">
+                              Virginia
+                            </option>
+                            <option label="Washington" value="WA">
+                              Washington
+                            </option>
+                            <option label="West Virginia" value="WV">
+                              West Virginia
+                            </option>
+                            <option label="Wisconsin" value="WI">
+                              Wisconsin
+                            </option>
+                            <option label="Wyoming" value="WY">
+                              Wyoming
+                            </option>
+                            <option
+                              label="Armed Forces - Europe/Africa/Canada"
+                              value="AE"
+                            >
+                              Armed Forces - Europe/Africa/Canada
+                            </option>
+                            <option label="Armed Forces Pacific" value="AP">
+                              Armed Forces Pacific
+                            </option>
+                            <option label="Armed Forces Americas" value="AA">
+                              Armed Forces Americas
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <button className="form-btn">Edit Account</button>
+                  </form>
                 </div>
 
                 <div className={`create-account ${form !== "pet" && "hide"}`}>
@@ -645,7 +1048,7 @@ const Index = () => {
                       You currently do not have any pets registered with Elanco
                     </p>
                   ) : (
-                    <p></p>
+                    myPets.map((pet, index) => <SinglePet {...pet} />)
                   )}
                   {!addingPet ? (
                     <button
@@ -657,11 +1060,17 @@ const Index = () => {
                     </button>
                   ) : (
                     <form className="petForm" onSubmit={addPet}>
+                      <h2>Adding Pet</h2>
                       <div className="form-group">
                         <input
                           type="text"
                           className="text-form"
                           placeholder="Pet Name"
+                          onChange={(e) => {
+                            const temp = formPet;
+                            temp.name = e.target.value;
+                            setFormPet(temp);
+                          }}
                         ></input>
                       </div>
                       <div className="form-group">
@@ -669,9 +1078,14 @@ const Index = () => {
                           type="text"
                           className="text-form"
                           placeholder="Pet Age"
+                          onChange={(e) => {
+                            const temp = formPet;
+                            temp.age = e.target.value;
+                            setFormPet(temp);
+                          }}
                         ></input>
                       </div>
-                      {formPet.img === "" ? (
+                      {!petImage ? (
                         <div
                           className="form-group"
                           style={{ overflow: "auto", border: "none" }}
@@ -690,10 +1104,10 @@ const Index = () => {
                           className="form-group"
                           style={{ overflow: "auto" }}
                         >
-                          <p className="petP">{formPet.img}</p>
+                          <p className="petP">{petImage.name}</p>
                           <img
                             className="petPic"
-                            src={formPet.img}
+                            src={petImage.name}
                             width="40px"
                             height="20px"
                           />
