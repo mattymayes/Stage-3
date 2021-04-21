@@ -4,6 +4,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   font-family: Open Sans, "Arial", "Helvetica", "sans-serif";
+  overflow: auto;
 }
 body {
   margin: 0;
@@ -375,4 +376,45 @@ strong {
   color: #12690f;
   background-color: #b2ceb4;
   border-color: #ebccd1;
+}
+.petBox {
+  position: fixed;
+  background-color: #f2dede;
+
+  color: #a94442;
+  z-index: 1000;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.petForm {
+  margin: auto;
+  width: 75%;
+}
+input[type="file"] {
+  display: none;
+}
+.petPic {
+  border: 2px solid black;
+  float: left;
+  margin-bottom: 5px;
+}
+.petLabel {
+  background-color: #022541;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  float: left;
+}
+.petGroup {
+  overflow: auto;
+}
+.petP {
+  float: left;
+  color: #666;
+  margin-right: 50px;
 }

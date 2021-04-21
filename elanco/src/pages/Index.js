@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import WelcomeBox from "../components/WelcomeBox";
+
 import { useGlobalContext } from "../context";
+import { FaChevronRight } from "react-icons/fa";
 
 const getLocalStorage = () => {
   let list = localStorage.getItem("list");
   if (list) {
     return JSON.parse(localStorage.getItem("list"));
-  }
+  } else return [];
+};
+const getLocalPets = () => {
+  let pets = localStorage.getItem("pets");
+  if (pets) {
+    return JSON.parse(localStorage.getItem("pets"));
+  } else return [];
 };
 const Index = () => {
   const [form, setForm] = useState("");
@@ -18,6 +26,15 @@ const Index = () => {
     missing: "",
     password: "",
     email: "",
+  });
+  const [myPets, setMyPets] = useState(getLocalPets());
+  const [addingPet, setAddingPet] = useState(false);
+  const [petImage, setPetImage] = useState();
+  const [formPet, setFormPet] = useState({
+    name: "",
+    age: "",
+    img: "",
+    owner: "",
   });
 
   const [newAccount, setNewAccount] = useState({
@@ -39,8 +56,12 @@ const Index = () => {
     {
       if (type === "create") {
         form === "create" ? setForm("") : setForm("create");
-      } else {
+      } else if (type === "log") {
         form === "log" ? setForm("") : setForm("log");
+      } else if (type === "pet") {
+        form === "pet" ? setForm("") : setForm("pet");
+      } else if (type === "edit") {
+        form === "edit" ? setForm("") : setForm("edit");
       }
     }
   };
@@ -139,6 +160,20 @@ const Index = () => {
       setAccount(tempFormAccount);
     }
   };
+  const handlePet = (e) => {
+    setPetImage(e.target.files[0]);
+  };
+  useEffect(() => {
+    if (petImage) {
+      const temp = formPet;
+      temp.img = petImage.name;
+      setFormPet(temp);
+    }
+  }, [petImage]);
+  const addPet = (e) => {
+    e.preventDefault();
+    const tempPets = [...myPets, formPet];
+  };
 
   return (
     <>
@@ -151,6 +186,7 @@ const Index = () => {
             <h2 style={{ marginBottom: "10px" }}>
               <strong style={{ fontSize: "32px" }}>Your Account</strong>
             </h2>
+
             {!account ? (
               <>
                 <p className="logAlert">You are not currently signed in</p>
@@ -536,6 +572,7 @@ const Index = () => {
                     <button className="form-btn">Create Account</button>
                   </form>
                 </div>
+
                 <div className={`sign-in ${form !== "log" && "hide"}`}>
                   <h2>Signing In</h2>
                   <form onSubmit={handleSignin}>
@@ -551,6 +588,9 @@ const Index = () => {
                         }}
                         className="text-form"
                         placeholder="email address"
+                        type="email"
+                        id="email"
+                        name="email"
                       />
                     </div>
                     <div
@@ -576,7 +616,100 @@ const Index = () => {
                 </div>
               </>
             ) : (
-              <p className="logAlert">Welcome back, {account.firstName}</p>
+              <div className="logIn-column">
+                <p className="logAlert">Welcome back, {account.firstName}</p>
+                <div className="accountDiv">
+                  <h3
+                    className={`accountH3 ${form === "pet" && "blueify"} `}
+                    onClick={() => handleCreate("pet")}
+                  >
+                    My Pets
+                  </h3>
+                  <h3
+                    className={`accountH3 ${form === "edit" && "blueify"} `}
+                    onClick={() => handleCreate("edit")}
+                  >
+                    Edit Details
+                  </h3>
+                </div>
+
+                <div className={`create-account ${form !== "edit" && "hide"}`}>
+                  lol
+                </div>
+
+                <div className={`create-account ${form !== "pet" && "hide"}`}>
+                  <h2>Pets</h2>
+
+                  {myPets.length === 0 ? (
+                    <p className="logAlert">
+                      You currently do not have any pets registered with Elanco
+                    </p>
+                  ) : (
+                    <p></p>
+                  )}
+                  {!addingPet ? (
+                    <button
+                      style={{ marginTop: "0px" }}
+                      className={`form-btn`}
+                      onClick={() => setAddingPet(true)}
+                    >
+                      Add Pet
+                    </button>
+                  ) : (
+                    <form className="petForm" onSubmit={addPet}>
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          className="text-form"
+                          placeholder="Pet Name"
+                        ></input>
+                      </div>
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          className="text-form"
+                          placeholder="Pet Age"
+                        ></input>
+                      </div>
+                      {formPet.img === "" ? (
+                        <div
+                          className="form-group"
+                          style={{ overflow: "auto", border: "none" }}
+                        >
+                          <label for="file-pet" className="petLabel">
+                            Add Image
+                          </label>
+                          <input
+                            type="file"
+                            id="file-pet"
+                            onClick={handlePet}
+                          ></input>
+                        </div>
+                      ) : (
+                        <div
+                          className="form-group"
+                          style={{ overflow: "auto" }}
+                        >
+                          <p className="petP">{formPet.img}</p>
+                          <img
+                            className="petPic"
+                            src={formPet.img}
+                            width="40px"
+                            height="20px"
+                          />
+                        </div>
+                      )}
+
+                      <button
+                        style={{ marginTop: "0px" }}
+                        className={`form-btn`}
+                      >
+                        Add
+                      </button>
+                    </form>
+                  )}
+                </div>
+              </div>
             )}
           </div>
         </div>
