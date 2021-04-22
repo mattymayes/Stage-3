@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Link,
   useLocation,
 } from "react-router-dom";
 import { offers } from "../data";
@@ -80,28 +81,18 @@ const Scan = () => {
       </div>
 
       <div className="greyBox">
-        <button
-          className="back-btn"
-          onClick={() => {
-            window.location.href = `/offer/${id}`;
-          }}
-        >
+        <Link to={`/offer/${id}`} className="back-btn">
           <span>
             <FaChevronLeft className="downabit " />
           </span>
           Back
-        </button>
-        <button
-          className="form-btn"
-          onClick={() => {
-            window.location.href = `/clinic/${id}`;
-          }}
-        >
+        </Link>
+        <Link to={`/clinic/${id}`} className="form-btn">
           Continue
           <span>
             <FaChevronRight className="downabit " />
           </span>
-        </button>
+        </Link>
       </div>
     </section>
   );

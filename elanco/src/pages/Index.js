@@ -17,9 +17,10 @@ const getLocalPets = () => {
   } else return [];
 };
 const Index = () => {
+  const { account, setAccount } = useGlobalContext();
   const [form, setForm] = useState("");
   const [formAccount, setFormAccount] = useState({ email: "", password: "" });
-  const [account, setAccount] = useState();
+
   const [signError, setSignError] = useState("");
   const [accounts, setAccounts] = useState(getLocalStorage());
   const [createError, setCreateError] = useState({
@@ -145,6 +146,7 @@ const Index = () => {
 
   const handleSignin = (e) => {
     e.preventDefault();
+    localStorage.setItem("account", "");
     if (!formAccount.email) {
       setSignError("Please Enter Your Email");
     } else if (!formAccount.password) {

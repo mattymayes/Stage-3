@@ -7,6 +7,7 @@ import SingleOffer from "./pages/SingleOffer";
 import Alert from "./components/Alert";
 import Scan from "./pages/Scan";
 import Clinic from "./pages/Clinic";
+import Pets from "./pages/Pets";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path="/clinic">
           <Clinic />
+        </Route>
+        <Route path="/pets">
+          <Pets />
         </Route>
       </Switch>
     </Router>

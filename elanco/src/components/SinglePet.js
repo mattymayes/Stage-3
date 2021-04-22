@@ -1,8 +1,11 @@
 import React from "react";
 
-const SinglePet = ({ name, img, age }) => {
+const SinglePet = ({ name, img, age, selected, onClick }) => {
   return (
-    <div className="singleClinic">
+    <div
+      className={`singleClinic ${selected && "petSelect"}`}
+      onClick={onClick}
+    >
       <div className="clinicCol">
         <img src={img} width="100px" height="50px" />
       </div>

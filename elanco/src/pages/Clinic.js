@@ -3,6 +3,7 @@ import { FaChevronRight, FaChevronLeft, FaTrashAlt } from "react-icons/fa";
 import { clinics } from "../data";
 import SingleClinic from "../components/SingleClinic";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Clinic = () => {
   const [activeClinics, setActiveClinics] = useState([]);
@@ -94,12 +95,12 @@ const Clinic = () => {
           </span>
           Back
         </button>
-        <button className="form-btn">
+        <Link to={`/pets`} className="form-btn">
           Continue
           <span>
             <FaChevronRight className="downabit " />
           </span>
-        </button>
+        </Link>
       </div>
     </section>
   );

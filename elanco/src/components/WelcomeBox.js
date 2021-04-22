@@ -3,8 +3,9 @@ import { FaChevronRight, FaFontAwesomeLogoFull } from "react-icons/fa";
 import { useGlobalContext } from "../context";
 import validator from "validator";
 import { offers } from "../data";
+import { Link, Redirect } from "react-router-dom";
 const WelcomeBox = () => {
-  const { alert, setAlert } = useGlobalContext();
+  const { alert, setAlert, account } = useGlobalContext();
 
   const [offer, setOffer] = useState("");
   const [date, setDate] = useState("");
@@ -29,6 +30,8 @@ const WelcomeBox = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    localStorage.setItem("account", JSON.stringify(account));
+
     if (offer) {
       if (date) {
         if (validateDate(date) && temp[0]) {
@@ -38,7 +41,7 @@ const WelcomeBox = () => {
         }
       }
     } else if (date && !offer) {
-      window.location.href = `offers/${date}`;
+      window.location.href = `offers/${offer}`;
     }
   };
 
