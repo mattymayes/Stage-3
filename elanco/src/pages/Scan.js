@@ -8,15 +8,12 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
+import { useGlobalContext } from "../context";
 import { offers } from "../data";
 import receipt from "../images/Example Reciept.png";
 
 const Scan = () => {
-  const location = useLocation();
-  const id = location.pathname.substring(6);
-  const offer = offers.filter((item) => item.id == id);
-
-  const [images, setImages] = useState([]);
+  const { selectedOffer, images, setImages } = useGlobalContext();
 
   const handleImage = () => {
     setImages([
@@ -39,6 +36,7 @@ const Scan = () => {
         offer. Please reference the example invoice that highlights the
         information required for a valid rebate submission.
       </p>
+
       <p className="paraPromo">
         Skip this step if you prefer to send your receipt by mail or fax,
         further details will be provided on the confirmation page. Please note
@@ -81,13 +79,14 @@ const Scan = () => {
       </div>
 
       <div className="greyBox">
-        <Link to={`/offer/${id}`} className="back-btn">
+        <Link to={`/offer/${selectedOffer[0].id}`} className="back-btn">
           <span>
             <FaChevronLeft className="downabit " />
           </span>
           Back
         </Link>
-        <Link to={`/clinic/${id}`} className="form-btn">
+
+        <Link to={`/clinic/${selectedOffer[0].id}`} className="form-btn">
           Continue
           <span>
             <FaChevronRight className="downabit " />

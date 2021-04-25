@@ -125,3 +125,17 @@ export const offers = [
     selected: false,
   },
 ];
+export const Rewards = [
+  {
+    img: "https://www.elancorebates.com/media/uploads/1607117641422.jpg",
+    name: "Receive Card via Email",
+    message:
+      "Receive a Virtual Elanco Prepaid Mastercard through email within 2 weeks after valid submission.",
+  },
+  {
+    img: "https://www.elancorebates.com/media/uploads/1607117641422.jpg",
+    name: "Receive Card via Mail",
+    message:
+      "Receive a Physical Elanco Prepaid Mastercard through mail delivery within 6-8 weeks after valid submission.",
+  },
+];

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useGlobalContext } from "../context";
+import React, { useState, useEffect } from "react";
 import SinglePet from "../components/SinglePet";
 import { Link, useLocation } from "react-router-dom";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { useGlobalContext } from "../context";
 const getLocalPets = () => {
   let pets = localStorage.getItem("pets");
   if (pets) {
@@ -16,13 +16,21 @@ const getAccount = () => {
   } else return [];
 };
 const Pets = () => {
-  const [selected, setSelected] = useState();
+  const { selectedPet, setSelectedPet } = useGlobalContext();
+  const [selected, setSelected] = useState(50000000000);
   const [pets, setPets] = useState(
     getLocalPets().filter((pet) => pet.owner === getAccount().email)
   );
   const location = useLocation();
   const id = location.pathname.substring(5);
-
+  useEffect(() => {
+    if (pets.length >= selected) {
+      console.log("lol");
+      setSelectedPet(pets[selected]);
+    } else {
+      setSelectedPet();
+    }
+  }, [selected]);
   return (
     <section className="section">
       <div className="progGroup">
@@ -40,18 +48,16 @@ const Pets = () => {
         />
       ))}
       <div className="greyBox">
-        <Link to={`/offer/${id}`} className="back-btn">
+        <Link to={`/clinic`} className="back-btn">
           <span>
             <FaChevronLeft className="downabit " />
           </span>
           Back
         </Link>
+
         <Link
           to={`/reward`}
-          className="form-btn"
-          onClick={() => {
-            localStorage.setItem("pet", JSON.stringify(pets[selected]));
-          }}
+          className={`form-btn ${selected === 50000000000 && "disableLink"}`}
         >
           Continue
           <span>

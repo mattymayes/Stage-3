@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Link,
   useLocation,
 } from "react-router-dom";
 import { offers } from "../data";
@@ -56,17 +57,15 @@ const Offers = () => {
           </span>
           Back
         </button>
-        <button
+        <Link
           className="form-btn"
-          onClick={() => {
-            window.location.href = `/offer/${offers[selected].id}`;
-          }}
+          to={`${selected ? `/offer/${offers[selected].id}` : ""}`}
         >
           Continue
           <span>
             <FaChevronRight className="downabit " />
           </span>
-        </button>
+        </Link>
       </div>
     </section>
   );

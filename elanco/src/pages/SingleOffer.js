@@ -6,10 +6,13 @@ import {
   Route,
   Switch,
   useLocation,
+  Link,
 } from "react-router-dom";
+import { useGlobalContext } from "../context";
 import { offers } from "../data";
 
 const SingleOffer = () => {
+  const { selectedOffer, setSelectedOffer } = useGlobalContext();
   const location = useLocation();
   const id = location.pathname.substring(7);
   const offer = offers.filter((item) => item.id == id);
@@ -77,28 +80,22 @@ const SingleOffer = () => {
         Cancel
       </a>
       <div className="greyBox">
-        <button
-          className="back-btn"
-          onClick={() => {
-            window.location.href = "/";
-          }}
-        >
+        <Link className="back-btn" to="/">
           <span>
             <FaChevronLeft className="downabit " />
           </span>
           Back
-        </button>
-        <button
+        </Link>
+        <Link
           className="form-btn"
-          onClick={() => {
-            window.location.href = `/scan/${id}`;
-          }}
+          to={`/scan`}
+          onClick={() => setSelectedOffer(offer)}
         >
           Continue
           <span>
             <FaChevronRight className="downabit " />
           </span>
-        </button>
+        </Link>
       </div>
     </section>
   );

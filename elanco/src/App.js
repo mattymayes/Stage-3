@@ -8,6 +8,8 @@ import Alert from "./components/Alert";
 import Scan from "./pages/Scan";
 import Clinic from "./pages/Clinic";
 import Pets from "./pages/Pets";
+import Reward from "./pages/Reward";
+import Review from "./pages/Review";
 
 function App() {
   return (
@@ -32,6 +34,12 @@ function App() {
         </Route>
         <Route path="/pets">
           <Pets />
+        </Route>
+        <Route path="/reward">
+          <Reward />
+        </Route>
+        <Route path="/review">
+          <Review />
         </Route>
       </Switch>
     </Router>

@@ -84,17 +84,12 @@ const Clinic = () => {
       })}
 
       <div className="greyBox">
-        <button
-          className="back-btn"
-          onClick={() => {
-            window.location.href = `/scan/${id}`;
-          }}
-        >
+        <Link to={`/scan/${id}`} className="back-btn">
           <span>
             <FaChevronLeft className="downabit " />
           </span>
           Back
-        </button>
+        </Link>
         <Link to={`/pets`} className="form-btn">
           Continue
           <span>

@@ -175,9 +175,10 @@ const Index = () => {
   });
   useEffect(() => {
     if (account) {
-      setMyPets(getLocalPets().filter((pet) => pet.owner === account.email));
+      setMyPets(pets.filter((pet) => pet.owner === account.email));
+      localStorage.setItem("account", JSON.stringify(account));
     }
-  }, [account]);
+  }, [account, pets]);
   const addPet = (e) => {
     e.preventDefault();
     const temp = formPet;
@@ -186,6 +187,7 @@ const Index = () => {
     setPetImage();
     const tempPets = [...pets, formPet];
     localStorage.setItem("pets", JSON.stringify(tempPets));
+    setPets(getLocalPets().filter((pet) => pet.owner === account.email));
   };
   const handleEditAccount = (e) => {
     e.preventDefault();
@@ -687,6 +689,9 @@ const Index = () => {
                     onClick={() => handleCreate("edit")}
                   >
                     Edit Details
+                  </h3>
+                  <h3 className={`accountH3 `} onClick={() => setAccount()}>
+                    Log Out
                   </h3>
                 </div>
 
