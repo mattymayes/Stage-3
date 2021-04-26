@@ -690,7 +690,13 @@ const Index = () => {
                   >
                     Edit Details
                   </h3>
-                  <h3 className={`accountH3 `} onClick={() => setAccount()}>
+                  <h3
+                    className={`accountH3 `}
+                    onClick={() => {
+                      setAccount();
+                      localStorage.removeItem("account");
+                    }}
+                  >
                     Log Out
                   </h3>
                 </div>
@@ -1103,7 +1109,7 @@ const Index = () => {
                           <input
                             type="file"
                             id="file-pet"
-                            onClick={handlePet}
+                            onChange={handlePet}
                           ></input>
                         </div>
                       ) : (

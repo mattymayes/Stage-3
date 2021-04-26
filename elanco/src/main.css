@@ -309,6 +309,8 @@ strong {
   float: left;
 }
 .imageBtn {
+  display: inline-block;
+  font-size: 14px;
   background-color: #022541;
   padding: 10px 20px;
   margin-top: 20px;
@@ -321,6 +323,7 @@ strong {
   width: 80%;
 }
 .btn-text {
+  margin-bottom: 10px;
   line-height: 12px;
   color: #767676;
   font-style: italic;
@@ -531,4 +534,6 @@ small {
 }
 .accountH3:hover {
   color: #0067b1;
+}
+.addDiv {
 }

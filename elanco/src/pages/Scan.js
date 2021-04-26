@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ImCross } from "react-icons/im";
 import { FaChevronRight, FaChevronLeft, FaTrashAlt } from "react-icons/fa";
+import { FiCamera } from "react-icons/fi";
 import {
   BrowserRouter as Router,
   Route,
@@ -15,11 +16,12 @@ import receipt from "../images/Example Reciept.png";
 const Scan = () => {
   const { selectedOffer, images, setImages } = useGlobalContext();
 
-  const handleImage = () => {
+  const handleImage = (e) => {
+    console.log(e.target.files[0]);
     setImages([
       {
-        image: receipt,
-        text: "Example.png",
+        image: e.target.files[0].name,
+        text: e.target.files[0].name,
       },
     ]);
   };
@@ -46,9 +48,21 @@ const Scan = () => {
 
       <div className="row">
         <div className="scanDiv">
-          <button className="imageBtn" onClick={handleImage}>
-            Add Image
-          </button>
+          <div className="addDiv">
+            {" "}
+            <label htmlFor="file-scan" className="imageBtn">
+              {" "}
+              Add Image
+              <FiCamera />
+            </label>
+            <input
+              type="file"
+              id="file-scan"
+              onChange={handleImage}
+              placeholder="Add Image"
+            ></input>
+          </div>
+
           <p className="btn-text">
             Maximum 8 Images, File Type: JPEG, GIF, PNG, PDF, Maximum File Size:
             10 mb each

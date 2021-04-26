@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SingleReward from "../components/SingleReward";
 import { Rewards } from "../data";
 import { Link } from "react-router-dom";
@@ -8,11 +8,20 @@ import { useGlobalContext } from "../context";
 const Reward = () => {
   const {
     donate,
+    account,
     setDonate,
+    setAccount,
     selectReward,
     setSelectReward,
   } = useGlobalContext();
 
+  useEffect(() => {
+    const temp = account;
+    temp.donate = donate;
+    temp.selectReward = selectReward;
+    setAccount(temp);
+    localStorage.setItem("account", JSON.stringify(account));
+  }, [donate, selectReward]);
   return (
     <section className="section">
       <div className="progGroup">
@@ -55,15 +64,30 @@ const Reward = () => {
               className="text-form"
               type="text"
             >
-              <option value="None" selected="selected">
+              <option value="None" selected={donate === "none" && "selected"}>
                 Choose Donation Amount
               </option>
-              <option value="$1.00">$1.00</option>
-              <option value="$2.00">$2.00</option>
-              <option value="$3.00">$3.00</option>
-              <option value="$4.00">$4.00</option>
-              <option value="$5.00">$5.00</option>
-              <option value="Donate Full Amount">Donate Full Amount</option>
+              <option value="$1.00" selected={donate === "$1.00" && "selected"}>
+                $1.00
+              </option>
+              <option value="$2.00" selected={donate === "$2.00" && "selected"}>
+                $2.00
+              </option>
+              <option value="$3.00" selected={donate === "$3.00" && "selected"}>
+                $3.00
+              </option>
+              <option value="$4.00" selected={donate === "$4.00" && "selected"}>
+                $4.00
+              </option>
+              <option value="$5.00" selected={donate === "$5.00" && "selected"}>
+                $5.00
+              </option>
+              <option
+                value="Donate Full Amount"
+                selected={donate === "Donate Full Amount" && "selected"}
+              >
+                Donate Full Amount
+              </option>
             </select>
           </div>
         </div>

@@ -5,7 +5,7 @@ const getAccount = () => {
   let list = localStorage.getItem("account");
   if (list) {
     return JSON.parse(localStorage.getItem("account"));
-  } else return [];
+  }
 };
 const AppProvider = ({ children }) => {
   const [selectedPet, setSelectedPet] = useState();
@@ -13,8 +13,8 @@ const AppProvider = ({ children }) => {
   const [account, setAccount] = useState(getAccount());
   const [selectedOffer, setSelectedOffer] = useState("error");
   const [images, setImages] = useState([]);
-  const [selectReward, setSelectReward] = useState();
-  const [donate, setDonate] = useState("None");
+  const [selectReward, setSelectReward] = useState(account.selectReward);
+  const [donate, setDonate] = useState(account.donate);
   return (
     <AppContext.Provider
       value={{
