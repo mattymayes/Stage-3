@@ -10,6 +10,7 @@ import Clinic from "./pages/Clinic";
 import Pets from "./pages/Pets";
 import Reward from "./pages/Reward";
 import Review from "./pages/Review";
+import Final from "./pages/Final"
 
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
         </Route>
         <Route path="/review">
           <Review />
+        </Route>
+        <Route path="/final">
+          <Final />
         </Route>
       </Switch>
     </Router>

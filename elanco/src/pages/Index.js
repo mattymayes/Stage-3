@@ -28,6 +28,7 @@ const Index = () => {
     password: "",
     email: "",
   });
+  const [petError, setPetError] = useState("");
   const [pets, setPets] = useState(getLocalPets());
   const [myPets, setMyPets] = useState([]);
   const [addingPet, setAddingPet] = useState(false);
@@ -159,6 +160,7 @@ const Index = () => {
         item.email === formAccount.email &&
         item.password === formAccount.password
     );
+
     if (tempFormAccount) {
       setAccount(tempFormAccount);
     }
@@ -179,15 +181,30 @@ const Index = () => {
       localStorage.setItem("account", JSON.stringify(account));
     }
   }, [account, pets]);
+
   const addPet = (e) => {
     e.preventDefault();
+
     const temp = formPet;
-    temp.owner = account.email;
-    setAddingPet(false);
-    setPetImage();
-    const tempPets = [...pets, formPet];
-    localStorage.setItem("pets", JSON.stringify(tempPets));
-    setPets(getLocalPets().filter((pet) => pet.owner === account.email));
+    if (temp.name === "") {
+      setPetError("You must enter a name");
+    } else if (
+      temp.age == "1" ||
+      temp.age == "2" ||
+      temp.age == "3" ||
+      temp.age == "11" ||
+      temp.age == "6"
+    ) {
+      temp.owner = account.email;
+      setAddingPet(false);
+      setPetImage();
+      const tempPets = [...pets, formPet];
+      localStorage.setItem("pets", JSON.stringify(tempPets));
+      setPets(getLocalPets().filter((pet) => pet.owner === account.email));
+      setFormPet({ name: "", age: "", img: "", owner: "" });
+    } else {
+      setPetError("You must enter a valid age");
+    }
   };
   const handleEditAccount = (e) => {
     e.preventDefault();
@@ -354,6 +371,8 @@ const Index = () => {
                           <input
                             className="text-form"
                             placeholder="Email Address*"
+                            type="email"
+                            id="email"
                             onChange={(e) => {
                               const temp = newAccount;
                               temp.email = e.target.value;
@@ -365,6 +384,8 @@ const Index = () => {
                           <input
                             className="text-form"
                             placeholder="Confirm Email Address*"
+                            type="email"
+                            id="email"
                             onChange={(e) => {
                               const temp = newAccount;
                               temp.confirmEmail = e.target.value;
@@ -693,6 +714,13 @@ const Index = () => {
                   <h3
                     className={`accountH3 `}
                     onClick={() => {
+                      let temp = accounts;
+                      const tempAccount = account;
+                      const others = temp.filter(
+                        (acc) => acc.id !== account.id
+                      );
+                      temp = [...others, tempAccount];
+                      localStorage.setItem("list", JSON.stringify(temp));
                       setAccount();
                       localStorage.removeItem("account");
                     }}
@@ -1074,6 +1102,11 @@ const Index = () => {
                   ) : (
                     <form className="petForm" onSubmit={addPet}>
                       <h2>Adding Pet</h2>
+                      <div
+                        className={`createError ${petError === "" && "hide"}`}
+                      >
+                        {petError}
+                      </div>
                       <div className="form-group">
                         <input
                           type="text"

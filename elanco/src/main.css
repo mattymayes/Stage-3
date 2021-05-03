@@ -79,6 +79,14 @@ span {
   margin-bottom: 15px;
   border-bottom: 1px solid #e1e1e1;
 }
+.iconSpan {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  margin-right: 10px;
+  font-style: normal;
+  font-weight: 400;
+}
 .text-form {
   width: 100%;
   border: none;
@@ -139,7 +147,7 @@ p {
   transform-origin: 100% 0;
 }
 .offerBar {
-  width: 11.11%;
+  width: 14.3%;
 }
 .promo {
   color: #0067b1;
@@ -292,6 +300,7 @@ strong {
   font-weight: normal;
 }
 .createError {
+  font-size: 14px;
   color: #db2706;
   background-color: #ffedea;
   border: 1px solid #db2706;
@@ -312,6 +321,7 @@ strong {
   display: inline-block;
   font-size: 14px;
   background-color: #022541;
+  cursor: pointer;
   padding: 10px 20px;
   margin-top: 20px;
   overflow: hidden;
@@ -347,6 +357,11 @@ strong {
   background-color: #fff;
   position: fixed;
   z-index: 100000;
+}
+.confirmBtn {
+  padding: 14px;
+  text-align: center;
+  width: 100%;
 }
 .clinicZip {
   display: block;

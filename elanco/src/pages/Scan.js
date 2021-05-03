@@ -11,25 +11,42 @@ import {
 } from "react-router-dom";
 import { useGlobalContext } from "../context";
 import { offers } from "../data";
+
 import receipt from "../images/Example Reciept.png";
 
 const Scan = () => {
-  const { selectedOffer, images, setImages } = useGlobalContext();
+  const {
+    selectedOffer,
+    images,
+    setImages,
+    setAlert,
+    setText,
+  } = useGlobalContext();
 
   const handleImage = (e) => {
-    console.log(e.target.files[0]);
-    setImages([
-      {
-        image: e.target.files[0].name,
-        text: e.target.files[0].name,
-      },
-    ]);
+    console.log(e.target.files[0].name.split(".")[1]);
+    if (
+      e.target.files[0].name === "Example.jpg" ||
+      e.target.files[0].name === "Example2.JPG"
+    ) {
+      if (e.target.files[0].name === "Example2.JPG") {
+        setText();
+      }
+      setImages([
+        {
+          image: e.target.files[0].name,
+          text: e.target.files[0].name,
+        },
+      ]);
+    } else if (e.target.files[0].name.split(".")[1] !== "jpg") {
+      setAlert("File uploaded must be an image");
+    } else setAlert("Can't regognize the recipt");
   };
 
   return (
     <section className="section scan-section">
       <div className="progGroup">
-        <div className="progBar offerBar" style={{ width: "22%" }}></div>
+        <div className="progBar offerBar" style={{ width: "28.5%" }}></div>
       </div>
       <h1 className="promo">My Purchase Details </h1>
       <p className="paraPromo">
@@ -77,7 +94,7 @@ const Scan = () => {
                   ></img>
                   <div className="addImageTxt">{item.text}</div>
                   <div>
-                    <FaTrashAlt />
+                    <FaTrashAlt onClick={() => setImages([])} />
                   </div>
                 </div>
               </div>
@@ -100,7 +117,10 @@ const Scan = () => {
           Back
         </Link>
 
-        <Link to={`/clinic/${selectedOffer[0].id}`} className="form-btn">
+        <Link
+          to={`/clinic/${selectedOffer[0].id}`}
+          className={`form-btn ${images.length === 0 && "disableLink"}`}
+        >
           Continue
           <span>
             <FaChevronRight className="downabit " />

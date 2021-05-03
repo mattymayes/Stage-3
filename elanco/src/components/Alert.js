@@ -9,9 +9,7 @@ const Alert = () => {
     return () => clearTimeout(timeout);
   });
   return (
-    <div className={`${alert === true ? "error hide" : "error"}`}>
-      No Offer Found
-    </div>
+    <div className={`${alert === true ? "error hide" : "error"}`}>{alert}</div>
   );
 };
 

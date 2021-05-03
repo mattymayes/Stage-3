@@ -39,7 +39,7 @@ const WelcomeBox = () => {
         if (validateDate(date) && temp[0]) {
           linkyBoi.push(`offer/${offer}`);
         } else {
-          setAlert(false);
+          setAlert("No offer found");
         }
       }
     } else if (date && !offer) {

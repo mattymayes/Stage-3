@@ -4,10 +4,12 @@ import { clinics } from "../data";
 import SingleClinic from "../components/SingleClinic";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useGlobalContext } from "../context";
 
 const Clinic = () => {
+  const { text, setText } = useGlobalContext();
   const [activeClinics, setActiveClinics] = useState([]);
-  const [text, setText] = useState("75090");
+
   const [selected, setSelected] = useState();
   const location = useLocation();
   const id = location.pathname.substring(8);
@@ -28,7 +30,7 @@ const Clinic = () => {
   return (
     <section className="section">
       <div className="progGroup">
-        <div className="progBar offerBar" style={{ width: "33%" }}></div>
+        <div className="progBar offerBar" style={{ width: "48.5%" }}></div>
       </div>
       <h1 className="promo">My Clinic Details </h1>
       <p className="paraPromo">
@@ -84,7 +86,7 @@ const Clinic = () => {
       })}
 
       <div className="greyBox">
-        <Link to={`/scan/${id}`} className="back-btn">
+        <Link to={`/scan`} className="back-btn">
           <span>
             <FaChevronLeft className="downabit " />
           </span>

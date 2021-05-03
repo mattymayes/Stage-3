@@ -16,8 +16,13 @@ const getAccount = () => {
   } else return [];
 };
 const Pets = () => {
-  const { selectedPet, setSelectedPet } = useGlobalContext();
-  const [selected, setSelected] = useState(50000000000);
+  const {
+    selectedPet,
+    setSelectedPet,
+    setAccount,
+    account,
+  } = useGlobalContext();
+  const [selected, setSelected] = useState(account.selectedPet);
   const [pets, setPets] = useState(
     getLocalPets().filter((pet) => pet.owner === getAccount().email)
   );
@@ -27,6 +32,10 @@ const Pets = () => {
     if (pets.length >= selected) {
       console.log("lol");
       setSelectedPet(pets[selected]);
+      const temp = account;
+      temp.selectedPet = selected;
+      setAccount(temp);
+      localStorage.setItem("account", JSON.stringify(account));
     } else {
       setSelectedPet();
     }
@@ -34,7 +43,7 @@ const Pets = () => {
   return (
     <section className="section">
       <div className="progGroup">
-        <div className="progBar offerBar" style={{ width: "50%" }}></div>
+        <div className="progBar offerBar" style={{ width: "57.1%" }}></div>
       </div>
       <h1 className="promo">My Pets</h1>
       <p className="paraPromo">

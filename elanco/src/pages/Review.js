@@ -15,7 +15,7 @@ const Review = () => {
   return (
     <section className="section">
       <div className="progGroup">
-        <div className="progBar offerBar" style={{ width: "75%" }}></div>
+        <div className="progBar offerBar" style={{ width: "85.7%" }}></div>
       </div>
       <h1 className="promo">My Rebate Submission Summary</h1>
       <div className="reviewGroup">
@@ -134,6 +134,22 @@ const Review = () => {
         </div>
 
         <hr />
+      </div>
+      <div className="greyBox">
+        <Link to={`/reward`} className="back-btn">
+          <span>
+            <FaChevronLeft className="downabit " />
+          </span>
+          Back
+        </Link>
+
+        <Link
+          to={`/final`}
+          className={`form-btn ${images.length === 0 && "disableLink"}`}
+        >
+          Submit
+          <span></span>
+        </Link>
       </div>
     </section>
   );

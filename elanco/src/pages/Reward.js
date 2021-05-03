@@ -16,16 +16,22 @@ const Reward = () => {
   } = useGlobalContext();
 
   useEffect(() => {
-    const temp = account;
-    temp.donate = donate;
-    temp.selectReward = selectReward;
-    setAccount(temp);
-    localStorage.setItem("account", JSON.stringify(account));
+    if (selectReward !== 500000) {
+      const temp = account;
+      temp.donate = donate;
+      temp.selectReward = selectReward;
+      setAccount(temp);
+      localStorage.setItem("account", JSON.stringify(account));
+    }
   }, [donate, selectReward]);
+  useEffect(() => {
+    setDonate(account.donate);
+    setSelectReward(account.selectReward);
+  }, []);
   return (
     <section className="section">
       <div className="progGroup">
-        <div className="progBar offerBar" style={{ width: "33%" }}></div>
+        <div className="progBar offerBar" style={{ width: "71%" }}></div>
       </div>
       <h1 className="promo">My Rebate Selection</h1>
       <p className="parapromo" style={{ marginBottom: "10px" }}>
@@ -44,7 +50,11 @@ const Reward = () => {
         ))}
       </div>
       <hr></hr>
-      <div className={`donatePanel ${donate !== "None" && "selectReward"}`}>
+      <div
+        className={`donatePanel ${
+          donate !== "None" && donate && "selectReward"
+        }`}
+      >
         <div className="donateCol">
           <h1>Optional Donation to K9s For Warriors</h1>
           <span className="donateSpan">
@@ -64,7 +74,7 @@ const Reward = () => {
               className="text-form"
               type="text"
             >
-              <option value="None" selected={donate === "none" && "selected"}>
+              <option value="None" selected={donate === "None" && "selected"}>
                 Choose Donation Amount
               </option>
               <option value="$1.00" selected={donate === "$1.00" && "selected"}>
